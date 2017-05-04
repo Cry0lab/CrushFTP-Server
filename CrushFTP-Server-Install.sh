@@ -23,7 +23,9 @@ java -jar CrushFTP.jar -a "crushadmin" "password"
 eth_interface=$(ifconfig | egrep -o -m 1 '^[^\t:]+')
 
 #Backup the network config
-cp /etc/sysconfig/network-scripts/ifcfg-$eth_interface /etc/sysconfig/network-scripts/ifcfg-$eth_interface.txt
+cd ~
+mkdir Backup-Network-Configs
+cp /etc/sysconfig/network-scripts/ifcfg-$eth_interface ~/Backup-Network-Configs/ifcfg-$eth_interface.txt
 
 
 #Gather user Preferences
