@@ -75,8 +75,27 @@ echo
 echo "$SUBNET is a valid SUBNET MASK"
 echo
 
+#Ask for a Default Gateway
 echo "What is the default gateway?"
 read GATE
+
+#Check to see if a valid Default Gateway was entered
+validGATE()
+{
+I=$GATE
+if [ "$(ipcalc -cs $I && echo 1 || echo 0)" == 0 ]; then
+echo "Please enter a valid Default Gateway:"
+read GATE
+validGATE
+return 0
+fi
+}
+
+validGATE
+
+echo 
+echo "$GATE is a valid Default Gateway"
+echo
 
 echo "What is the Primary DNS Server?"
 read DNS1
