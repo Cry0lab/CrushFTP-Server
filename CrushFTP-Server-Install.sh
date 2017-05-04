@@ -35,7 +35,7 @@ read IP
 validIP()
 {
 I=$IP
-if [ "$ipcalc -cs $I && echo 1 || echo 0)" == 0 ]; then
+if [ "$(ipcalc -cs $I && echo 1 || echo 0)" == 0 ]; then
 echo "Please enter a valid IP Address:"
 read IP
 validIP
