@@ -32,6 +32,21 @@ cp /etc/sysconfig/network-scripts/ifcfg-$eth_interface ~/Backup-Network-Configs/
 echo "What would you like your static IP ADDRESS to be?"
 read IP
 
+validIP()
+{
+I=$IP
+if [ "$ipcalc -cs $I && echo 1 || echo 0)" == 0 ]; then
+echo "Please enter a valid IP Address:"
+read IP
+validIP
+return 0
+fi
+}
+
+echo 
+echo "$IP is a valid IP ADDRESS"
+echo
+
 echo "What is the SUBNET MASK of the network?"
 read SUBNET
 
