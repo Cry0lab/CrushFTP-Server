@@ -26,25 +26,58 @@ eth_interface=$(ifconfig | egrep -o -m 1 '^[^\t:]+')
 cp /etc/sysconfig/network-scripts/ifcfg-$eth_interface /etc/sysconfig/network-scripts/ifcfg-$eth_interface.bk
 
 
-#Set static IP
+#Gather user Preferences
 echo "What would you like your static IP ADDRESS to be?"
 read IP
 
 echo "What is the SUBNET MASK of the network?"
 read SUBNET
 
+echo "What is the default gateway?"
+read GATE
+
+echo "What is the Primary DNS Server?"
+read DNS1
+
+echo "What is the Secondary DNS Server?"
+read DNS2
+
+echo "What is the Hostname of this server?"
+read HOST
+
+#Configure static IP
 cat <<EOF > /etc/sysconfig/network-scripts/ifcfg-$eth_interface
 TYPE=Ethernet
 BOOTPROTO=static
 IPADDR=$IP
 NETMASK=$SUBNET
+NM_CONTROLLED=no
 DEFROUTE=yes
 PEERDNS=yes
 PEERROUTES=yes
 IPV4_FAILURE_FATAL=no
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_PEERDNS=yes
+IPV6_PEERROUTES=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
 NAME=$eth_interface
 DEVICE=$eth_interface
 ONBOOT=yes
+EOF
+
+#Edit the network file to configure hostname and Gateway
+cat <<EOF > /etc/sysconfig/network
+NETWORKING=yes
+HOSTNAME=$HOST
+GATEWAY=$GATE
+EOF
+
+#Add dns nameservers
+cat <<EOF > /etc/resolv.conf
+nameserver $DNS1
+nameserver $DNS2
 EOF
 
 service network restart
