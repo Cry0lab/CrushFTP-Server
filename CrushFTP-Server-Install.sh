@@ -69,12 +69,16 @@ DEVICE=$eth_interface
 ONBOOT=yes
 EOF
 
+service network restart
+
 #Edit the network file to configure hostname and Gateway
 cat <<EOF > /etc/sysconfig/network
 NETWORKING=yes
 HOSTNAME=$HOST
 GATEWAY=$GATE
 EOF
+
+service network restart
 
 #Add dns nameservers
 cat <<EOF > /etc/resolv.conf
