@@ -29,9 +29,12 @@ cp /etc/sysconfig/network-scripts/ifcfg-$eth_interface ~/Backup-Network-Configs/
 
 
 #Gather user Preferences
+
+#Ask for an IP ADDRESS
 echo "What would you like your static IP ADDRESS to be?"
 read IP
 
+#Check to see if a valid IP ADDRESS was entered
 validIP()
 {
 I=$IP
@@ -49,8 +52,28 @@ echo
 echo "$IP is a valid IP ADDRESS"
 echo
 
+
+#Ask for a SUBNET MASK
 echo "What is the SUBNET MASK of the network?"
 read SUBNET
+
+#Check to see if a valid SUBNET MASK was entered
+validSUBNET()
+{
+I=$SUBNET
+if [ "$(ipcalc -cs $I && echo 1 || echo 0)" == 0 ]; then
+echo "Please enter a valid IP Address:"
+read SUBNET
+validIP
+return 0
+fi
+}
+
+validSUBNET
+
+echo 
+echo "$SUBNET is a valid SUBNET MASK"
+echo
 
 echo "What is the default gateway?"
 read GATE
