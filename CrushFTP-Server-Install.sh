@@ -34,10 +34,16 @@ echo "What is the SUBNET MASK of the network?"
 read SUBNET
 
 cat <<EOF > /etc/sysconfig/network-scripts/ifcfg-$eth_interface
-DEVICE=$eth_interface
+TYPE=Ethernet
 BOOTPROTO=static
 IPADDR=$IP
 NETMASK=$SUBNET
+DEFROUTE=yes
+PEERDNS=yes
+PEERROUTES=yes
+IPV4_FAILURE_FATAL=no
+NAME=$eth_interface
+DEVICE=$eth_interface
 ONBOOT=yes
 EOF
 
