@@ -87,6 +87,9 @@ nameserver $DNS2
 EOF
 
 service network restart
-
+echo 
+echo
 echo "CrushFTP is now installed. Default admin login is crushadmin and password. "
+echo
 echo "Open a browser and go to https://$IP to start setting up CrushFTP."
+echo
