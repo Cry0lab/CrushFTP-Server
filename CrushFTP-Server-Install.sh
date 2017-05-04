@@ -97,12 +97,51 @@ echo
 echo "$GATE is a valid Default Gateway"
 echo
 
+#Ask for a Primary DNS Server
 echo "What is the Primary DNS Server?"
 read DNS1
 
+#Check to see if a valid Primary DNS Server was entered
+validDNS1()
+{
+I=$DNS1
+if [ "$(ipcalc -cs $I && echo 1 || echo 0)" == 0 ]; then
+echo "Please enter a valid Primary DNS Server:"
+read DNS1
+validDNS1
+return 0
+fi
+}
+
+validDNS1
+
+echo 
+echo "$DNS1 is a valid Primary DNS Server"
+echo
+
+#Ask for a Secondary DNS Server
 echo "What is the Secondary DNS Server?"
 read DNS2
 
+#Check to see if a valid Secondary DNS Server was entered
+validDNS2()
+{
+I=$DNS2
+if [ "$(ipcalc -cs $I && echo 1 || echo 0)" == 0 ]; then
+echo "Please enter a valid Secondary DNS Server:"
+read DNS2
+validDNS2
+return 0
+fi
+}
+
+validDNS2
+
+echo 
+echo "$DNS2 is a valid Secondary DNS Server"
+echo
+
+#Ask for a Hostname
 echo "What is the Hostname of this server?"
 read HOST
 
