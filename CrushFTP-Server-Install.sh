@@ -62,9 +62,9 @@ validSUBNET()
 {
 I=$SUBNET
 if [ "$(ipcalc -cs $I && echo 1 || echo 0)" == 0 ]; then
-echo "Please enter a valid IP Address:"
+echo "Please enter a valid SUBNET MASK:"
 read SUBNET
-validIP
+validSUBNET
 return 0
 fi
 }
