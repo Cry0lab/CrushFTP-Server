@@ -43,6 +43,8 @@ return 0
 fi
 }
 
+validIP
+
 echo 
 echo "$IP is a valid IP ADDRESS"
 echo
