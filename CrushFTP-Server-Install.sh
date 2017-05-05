@@ -192,16 +192,6 @@ EOF
 service network restart
 echo 
 echo
-
-#Join the server to a Domain
-echo "What Domain would you like to join?"
-read DOM
-echo
-echo "What is the username for the Domain Administrator? (Leave out the 'Domain\' part)"
-read DOMADMIN
-realm join --user=$DOMADMIN $DOM
-echo
-
 echo "CrushFTP is now installed. Default admin login is crushadmin and password. "
 echo
 echo "Open a browser and go to https://$IP to start setting up CrushFTP."
