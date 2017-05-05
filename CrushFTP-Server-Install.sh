@@ -23,7 +23,7 @@ java -jar CrushFTP.jar -a "crushadmin" "password"
 eth_interface=$(ifconfig | egrep -o -m 1 '^[^\t:]+')
 DHCP_IP=$(ifconfig $eth_interface | grep -w inet |grep -v 127.0.0.1| awk '{print $2}' | cut -d ":" -f 2 )
 DHCP_SUBNET=$(ifconfig $eth_interface | grep -w inet |grep -v 127.0.0.1| awk '{print $4}' | cut -d ":" -f 2 )
-DCHP_GATEWAY=$(ip route list dev $eth_interface | awk ' /^default/ {print $3}'
+DCHP_GATEWAY=$(ip route list dev $eth_interface | awk ' /^default/ {print $3}' )
 
 #Backup the network config
 cd ~
