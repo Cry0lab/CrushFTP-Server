@@ -2,7 +2,7 @@
 
 #installs necessary programs
 yum update -y
-yum install wget nano unzip java -y
+yum install wget nano unzip java sssd realmd oddjob oddjob-mkhomedir adcli samba-common samba-common-tools krb5-workstation openldap-clients policycoreutils-python-y
  
 #Disables firewall
 systemctl disable firewalld
@@ -192,6 +192,16 @@ EOF
 service network restart
 echo 
 echo
+
+#Join the server to a Domain
+echo "What Domain would you like to joing?"
+read DOM
+echo
+echo "What is the username for the Domain Administrator? (Leave out the 'Domain\' part)"
+read DOMADMIN
+realm join --user=$DOMADMIN $DOM
+echo
+
 echo "CrushFTP is now installed. Default admin login is crushadmin and password. "
 echo
 echo "Open a browser and go to https://$IP to start setting up CrushFTP."
