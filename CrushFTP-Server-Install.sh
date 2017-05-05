@@ -21,6 +21,9 @@ java -jar CrushFTP.jar -a "crushadmin" "password"
 
 #Get the name First ethernet interface listed in ifconfig
 eth_interface=$(ifconfig | egrep -o -m 1 '^[^\t:]+')
+DHCP_IP=$(ifconfig $eth_interface | grep -w inet |grep -v 127.0.0.1| awk '{print $2}' | cut -d ":" -f 2 )
+DHCP_SUBNET=$(ifconfig $eth_interface | grep -w inet |grep -v 127.0.0.1| awk '{print $4}' | cut -d ":" -f 2 )
+DCHP_GATEWAY=$(ip route list dev $eth_interface | awk ' /^default/ {print $3}'
 
 #Backup the network config
 cd ~
@@ -34,7 +37,12 @@ echo
 echo "Configuring Network settings:"
 echo
 echo
-
+echo "Your Current Network Settings set by dhcp are:"
+echo "IP ADDRESS: $DCHP_IP"
+echo "SUBNET MASK: $DHCP_SUBNET"
+echo "DEFAULT GATEWAY: $DHCP_GATEWAY"
+echo
+echo
 #Ask for an IP ADDRESS
 echo "What would you like your static IP ADDRESS to be?"
 read IP
