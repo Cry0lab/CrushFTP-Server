@@ -2,7 +2,7 @@
 
 #installs necessary programs
 yum update -y
-yum install wget nano unzip java sssd realmd oddjob oddjob-mkhomedir adcli samba-common samba-common-tools krb5-workstation openldap-clients policycoreutils-python-y
+yum install wget nano unzip java sssd realmd oddjob oddjob-mkhomedir adcli samba-common samba-common-tools krb5-workstation openldap-clients policycoreutils-python -y
  
 #Disables firewall
 systemctl disable firewalld
