@@ -168,7 +168,6 @@ NAME=$eth_interface
 DEVICE=$eth_interface
 ONBOOT=yes
 EOF
-
 service network restart
 
 #Edit the network file to configure hostname and Gateway
@@ -177,7 +176,6 @@ NETWORKING=yes
 HOSTNAME=$HOST
 GATEWAY=$GATE
 EOF
-
 service network restart
 
 #Add dns nameservers
@@ -185,7 +183,7 @@ cat <<EOF > /etc/resolv.conf
 nameserver $DNS1
 nameserver $DNS2
 EOF
-
+service network restart
 
 #Installation of CrushFTP
 cd /var/opt/
@@ -198,8 +196,6 @@ java -jar CrushFTP.jar -a "crushadmin" "password"
 ./crushftp_init.sh install
 
 
-
-service network restart
 echo 
 echo
 echo "CrushFTP is now installed. Default admin login is crushadmin and password. "
