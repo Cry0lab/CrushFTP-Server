@@ -29,6 +29,11 @@ cp /etc/sysconfig/network-scripts/ifcfg-$eth_interface ~/Backup-Network-Configs/
 
 
 #Gather user Preferences
+echo
+echo
+echo "Configuring Network settings:"
+echo
+echo
 
 #Ask for an IP ADDRESS
 echo "What would you like your static IP ADDRESS to be?"
@@ -98,7 +103,7 @@ echo "$GATE is a valid Default Gateway"
 echo
 
 #Ask for a Primary DNS Server
-echo "What is the Primary DNS Server?"
+echo "What is the Primary DNS Server? (If you plan on joining a Domain, use the Primary DNS server of the Domain Controller.)"
 read DNS1
 
 #Check to see if a valid Primary DNS Server was entered
