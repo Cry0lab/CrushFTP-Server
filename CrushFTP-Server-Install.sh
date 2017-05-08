@@ -39,7 +39,11 @@ case "$choice" in
 esac
 
 echo $DCHP_AUTO_IP_SUB_GATE
-
+if [DHCP_AUTO_IP_SUB_GATE=="y"]; then
+IP=$DHCP_IP
+SUBNET=$DHCP_SUBNET
+GATE=$DHCP_GATEWAY
+else
 #Ask for an IP ADDRESS
 echo "What would you like your static IP ADDRESS to be?"
 read IP
@@ -106,7 +110,7 @@ validGATE
 echo 
 echo "$GATE is a valid Default Gateway"
 echo
-
+fi #Line 42
 #Ask for a Primary DNS Server
 echo "What is the Primary DNS Server? (If you plan on joining a Domain, use the Primary DNS server of the Domain Controller.)"
 read DNS1
