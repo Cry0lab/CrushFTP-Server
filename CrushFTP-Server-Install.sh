@@ -112,6 +112,7 @@ echo
 echo "$GATE is a valid Default Gateway"
 echo
 fi #Line 42
+echo
 #Ask for a Primary DNS Server
 echo "What is the Primary DNS Server? (If you plan on joining a Domain, use the Primary DNS server of the Domain Controller.)"
 read DNS1
