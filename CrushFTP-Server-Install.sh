@@ -2,7 +2,7 @@
 
 #installs necessary programs
 yum update -y
-yum install wget nano unzip java sssd realmd oddjob oddjob-mkhomedir adcli samba-common samba-common-tools krb5-workstation openldap-clients policycoreutils-python -y
+yum install wget nano unzip java -y
  
 #Disables firewall
 systemctl disable firewalld
@@ -14,6 +14,7 @@ DHCP_IP=$(ifconfig $eth_interface | grep -w inet | grep -v 127.0.0.1| awk '{prin
 DHCP_SUBNET=$(ifconfig $eth_interface | grep -w inet |grep -v 127.0.0.1| awk '{print $4}' | cut -d ":" -f 2 )
 DHCP_GATEWAY=$(ip route list dev $eth_interface | awk ' /^default/ {print $3}' )
 DHCP_UUID=$(cat /etc/sysconfig/network-scripts/ifcfg-ens33 | grep UUID )
+DCHP_AUTO_IP_SUB_GATE=2
 #Backup the network config
 cd ~
 mkdir Backup-Network-Configs
@@ -32,6 +33,14 @@ echo "SUBNET MASK: $DHCP_SUBNET"
 echo "DEFAULT GATEWAY: $DHCP_GATEWAY"
 echo
 echo
+read -p "Would you like to accept these settings?" choice
+case "$choice" in
+ y|Y|$response ) $DCHP_AUTO_IP_SUB_GATE=1;;
+ n|N|* ) $DCHP_AUTO_IP_SUB_GATE=2;;
+esac
+
+echo $DCHP_AUOT_IP_SUB_GATE
+
 #Ask for an IP ADDRESS
 echo "What would you like your static IP ADDRESS to be?"
 read IP
