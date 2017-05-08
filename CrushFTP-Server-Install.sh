@@ -23,7 +23,7 @@ cp /etc/sysconfig/network-scripts/ifcfg-$eth_interface ~/Backup-Network-Configs/
 #Gather user Preferences
 echo
 echo
-echo "Configuring Network settings:"
+echo "Configuring Static Network settings:"
 echo
 echo
 echo "Your Current Network Settings set by dhcp are:"
@@ -32,13 +32,13 @@ echo "SUBNET MASK: $DHCP_SUBNET"
 echo "DEFAULT GATEWAY: $DHCP_GATEWAY"
 echo
 echo
-read -p "Would you like to accept these settings? ([y]/n)" choice
+read -p "Would you like to accept these settings and assign them statically? ([y]/n)" choice
 case "$choice" in
  y|Y|$response ) AUTO_IP="y";;
  n|N|* ) AUTO_IP="n";;
 esac
 
-echo $AUTO_IP
+#echo $AUTO_IP
 if [ "$AUTO_IP" =  "y" ]; then
 IP=$DHCP_IP
 SUBNET=$DHCP_SUBNET
@@ -46,6 +46,8 @@ GATE=$DHCP_GATEWAY
 #echo $IP $SUBNET $GATE
 else
 #Ask for an IP ADDRESS
+echo
+echo
 echo "What would you like your static IP ADDRESS to be?"
 read IP
 
