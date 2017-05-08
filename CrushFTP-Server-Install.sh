@@ -39,7 +39,7 @@ case "$choice" in
 esac
 
 echo $DCHP_AUTO_IP_SUB_GATE
-if ["$DHCP_AUTO_IP_SUB_GATE"=="y"]; then
+if [ "$DHCP_AUTO_IP_SUB_GATE" =  "y" ]; then
 IP=$DHCP_IP
 SUBNET=$DHCP_SUBNET
 GATE=$DHCP_GATEWAY
