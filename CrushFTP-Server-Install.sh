@@ -43,6 +43,8 @@ if [ "$DHCP_AUTO_IP_SUB_GATE" =  "y" ]; then
 IP=$DHCP_IP
 SUBNET=$DHCP_SUBNET
 GATE=$DHCP_GATEWAY
+echo $IP $SUBNET $GATE
+return 0
 else
 #Ask for an IP ADDRESS
 echo "What would you like your static IP ADDRESS to be?"
