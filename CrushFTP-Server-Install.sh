@@ -43,7 +43,7 @@ if [ "$AUTO_IP" =  "y" ]; then
 IP=$DHCP_IP
 SUBNET=$DHCP_SUBNET
 GATE=$DHCP_GATEWAY
-echo $IP $SUBNET $GATE
+#echo $IP $SUBNET $GATE
 else
 #Ask for an IP ADDRESS
 echo "What would you like your static IP ADDRESS to be?"
@@ -160,7 +160,10 @@ echo
 #Ask for a Hostname
 echo "What is the Hostname of this server?"
 read HOST
-
+echo
+echo
+echo "Applying your settings. The Network Service will now restart 3 times."
+echo
 #Configure static IP
 cat <<EOF > /etc/sysconfig/network-scripts/ifcfg-$eth_interface
 TYPE=Ethernet
@@ -191,6 +194,9 @@ NETWORKING=yes
 HOSTNAME=$HOST
 GATEWAY=$GATE
 EOF
+
+hostnamectl set-hostname $HOST
+
 service network restart
 
 #Add dns nameservers
