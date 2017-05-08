@@ -34,17 +34,16 @@ echo
 echo
 read -p "Would you like to accept these settings? ([y]/n)" choice
 case "$choice" in
- y|Y|$response ) DCHP_AUTO_IP_SUB_GATE="y";;
- n|N|* ) DCHP_AUTO_IP_SUB_GATE="n";;
+ y|Y|$response ) AUTO_IP="y";;
+ n|N|* ) AUTO_IP="n";;
 esac
 
-echo $DCHP_AUTO_IP_SUB_GATE
-if [ "$DHCP_AUTO_IP_SUB_GATE" =  "y" ]; then
+echo $AUTO_IP
+if [ "$AUTO_IP" =  "y" ]; then
 IP=$DHCP_IP
 SUBNET=$DHCP_SUBNET
 GATE=$DHCP_GATEWAY
 echo $IP $SUBNET $GATE
-return 0
 else
 #Ask for an IP ADDRESS
 echo "What would you like your static IP ADDRESS to be?"
