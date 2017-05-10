@@ -8,7 +8,7 @@ yum install wget nano unzip java -y
 systemctl disable firewalld
 systemctl stop firewalld
 
-#Get the name First ethernet interface listed in ifconfig
+#Get the name First ethernet interface listed in ifconfig and current network settings
 eth_interface=$(ifconfig | egrep -o -m 1 '^[^\t:]+')
 DHCP_IP=$(ifconfig $eth_interface | grep -w inet | grep -v 127.0.0.1| awk '{print $2}' | cut -d ":" -f 2 )
 DHCP_SUBNET=$(ifconfig $eth_interface | grep -w inet |grep -v 127.0.0.1| awk '{print $4}' | cut -d ":" -f 2 )
@@ -20,13 +20,13 @@ mkdir Backup-Network-Configs
 cp /etc/sysconfig/network-scripts/ifcfg-$eth_interface ~/Backup-Network-Configs/ifcfg-$eth_interface.txt
 
 
-#Gather user Preferences
+#Gather user Preferences for the Network
 echo
 echo
 echo "Configuring Static Network settings:"
 echo
 echo
-echo "Your Current Network Settings set by dhcp are:"
+echo "Current Network Settings:"
 echo "IP ADDRESS: $DHCP_IP"
 echo "SUBNET MASK: $DHCP_SUBNET"
 echo "DEFAULT GATEWAY: $DHCP_GATEWAY"
@@ -38,7 +38,7 @@ case "$choice" in
  n|N|* ) AUTO_IP="n";;
 esac
 
-#echo $AUTO_IP
+#If the response is affirmative, skip to line 116. Otherwise, go to line 49
 if [ "$AUTO_IP" =  "y" ]; then
 IP=$DHCP_IP
 SUBNET=$DHCP_SUBNET
@@ -114,6 +114,8 @@ echo
 echo "$GATE is a valid Default Gateway"
 echo
 fi #Line 42
+
+
 echo
 #Ask for a Primary DNS Server
 echo "What is the Primary DNS Server? (If you plan on joining a Domain, use the Primary DNS server of the Domain Controller.)"
@@ -160,7 +162,7 @@ echo "$DNS2 is a valid Secondary DNS Server"
 echo
 
 #Ask for a Hostname
-echo "What is the Hostname of this server?"
+echo "Please enter a Hostname for this Server. WARNING: Whatever you enter will be accepted."
 read HOST
 echo
 echo
@@ -207,6 +209,9 @@ nameserver $DNS1
 nameserver $DNS2
 EOF
 service network restart
+
+echo
+echo "Network Configuration Complete. Now Installing CrushFTP"
 
 #Installation of CrushFTP
 cd /var/opt/
