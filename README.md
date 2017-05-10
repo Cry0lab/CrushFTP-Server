@@ -27,7 +27,7 @@ chmod +x CrushFTP-Server-Install.sh
 
 The script will do the following in this order:
 
-1: Install dependencies (wget nano unzip java)
+1: Install dependencies (wget nano unzip java net-tools)
 
 2: Stop and Disable the OS Firewall
 
