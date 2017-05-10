@@ -13,7 +13,7 @@ eth_interface=$(ifconfig | egrep -o -m 1 '^[^\t:]+')
 DHCP_IP=$(ifconfig $eth_interface | grep -w inet | grep -v 127.0.0.1| awk '{print $2}' | cut -d ":" -f 2 )
 DHCP_SUBNET=$(ifconfig $eth_interface | grep -w inet |grep -v 127.0.0.1| awk '{print $4}' | cut -d ":" -f 2 )
 DHCP_GATEWAY=$(ip route list dev $eth_interface | awk ' /^default/ {print $3}' )
-DHCP_UUID=$(cat /etc/sysconfig/network-scripts/ifcfg-ens33 | grep UUID )
+DHCP_UUID=$(cat /etc/sysconfig/network-scripts/ifcfg-$eth_interface | grep UUID )
 #Backup the network config
 cd ~
 mkdir Backup-Network-Configs
