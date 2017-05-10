@@ -212,7 +212,7 @@ service network restart
 
 echo
 echo "Network Configuration Complete. Now Installing CrushFTP"
-
+echo
 #Installation of CrushFTP
 cd /var/opt/
 wget https://www.crushftp.com/early8/CrushFTP8_PC.zip
