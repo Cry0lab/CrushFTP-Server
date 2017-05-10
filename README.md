@@ -31,7 +31,7 @@ The script will do the following in this order:
 
 2: Stop and Disable the OS Firewall
 
-3: Set static network settings. It will prompt you if you would like to keep the current settings for IP ADDRESS, SUBNET MASK, and DEFAULT GATEWAY. DNS and Hostname will always need to be set statically. The network service will restart 3 times.
+3: Set static network settings. It will prompt you if you would like to keep the current settings for IP ADDRESS, SUBNET MASK, and DEFAULT GATEWAY. DNS and Hostname will always need to be set statically. The network service will restart 3 times. A backup of the network configuration will be made and placed in the home directory of the current user.
 
 4: Install the CrushFTP server and set the default admin credentials.
 
