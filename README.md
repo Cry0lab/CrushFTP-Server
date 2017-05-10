@@ -21,6 +21,9 @@ chmod +x CrushFTP-Server-Install.sh
 ./CrushFTP-Server-Install.sh
 
 
+.
+.
+.
 
 The script will do the following in this order:
 
