@@ -2,7 +2,7 @@
 
 #installs necessary programs
 yum update -y
-yum install wget nano unzip java -y
+yum install wget nano unzip java net-tools -y
  
 #Disables firewall
 systemctl disable firewalld
