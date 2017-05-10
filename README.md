@@ -2,7 +2,7 @@
 This script can be run from a fresh install or an already running install of CENTOS 7. In theory, this should work in RHEL, but that has not been tested. This will not run inside of Debian based systems.
 
 
-#Must be run as root.#
+# Must be run as root. #
 
 
 
