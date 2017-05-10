@@ -14,8 +14,11 @@ chmod +x CrushFTP-Server-Install.sh
 The script will do the following in this order:
 
 1: Install dependencies (wget nano unzip java)
+
 2: Stop and Disable the OS Firewall
+
 3: Set static network settings. It will prompt you if you would like to keep the current settings for IP ADDRESS, SUBNET MASK, and DEFAULT GATEWAY. DNS and Hostname will always need to be set statically. The network service will restart 3 times.
+
 4: Install the CrushFTP server and set the default admin credentials.
 
 ############################################################
