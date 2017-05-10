@@ -4,12 +4,20 @@ This script can be run from a fresh install or an already running install of CEN
 Must be run as root.
 
 How to run this script:
+
 cd ~
+
 yum install git -y
+
 git clone git://github.com/YankeeForty2/CrushFTP-Server.git
+
 cd CrushFTP-Server/
+
 chmod +x CrushFTP-Server-Install.sh
+
 ./CrushFTP-Server-Install.sh
+
+
 
 The script will do the following in this order:
 
