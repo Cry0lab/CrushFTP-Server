@@ -25,9 +25,11 @@ isAlive ()
 {
 A=$(ping -c 4 $1 &> /dev/null; echo $? )
 if [ "A" != "0" ]; then
- return 0 #Available
+ return 0 
+ echo "Available"
 else
- return 1 #Not Available
+ return 1 
+ echo "Not Available"
 fi
 
 }
