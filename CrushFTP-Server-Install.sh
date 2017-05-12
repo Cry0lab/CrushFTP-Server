@@ -67,7 +67,7 @@ read IP
 validIP()
 {
 I=$IP
-if [ "isAlive $I" == "1"]; then
+if [ "isAlive $I" == "1" ]; then
  echo "That IP ADDRESS is already in use. Please enter a different one:"
  validIP
 fi
