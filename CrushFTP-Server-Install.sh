@@ -23,7 +23,7 @@ cp /etc/sysconfig/network-scripts/ifcfg-$eth_interface ~/Backup-Network-Configs/
 #Functions
 isAlive ()
 {
-A=($ping -c 4 $1 &> /dev/null; echo $? )
+A=$(ping -c 4 $1 &> /dev/null; echo $? )
 if [ "A" != "0" ]; then
  return 0 #Available
 else
