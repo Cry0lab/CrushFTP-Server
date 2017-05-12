@@ -20,6 +20,18 @@ mkdir Backup-Network-Configs
 cp /etc/sysconfig/network-scripts/ifcfg-$eth_interface ~/Backup-Network-Configs/ifcfg-$eth_interface.txt
 
 
+#Functions
+isAlive ()
+{
+A=($ping -c 4 $1 &> /dev/null; echo $? )
+if [ "A" != "0" ]; then
+ return 0 #Available
+else
+ return 1 #Not Available
+fi
+
+}
+
 #Gather user Preferences for the Network
 echo
 echo
@@ -55,6 +67,9 @@ read IP
 validIP()
 {
 I=$IP
+if [ "isAlive $I" == "1"]; then
+ echo "That IP ADDRESS is already in use. Please enter a different one:"
+ validIP
 if [ "$(ipcalc -cs $I && echo 1 || echo 0)" == 0 ]; then
 echo "Please enter a valid IP Address:"
 read IP
