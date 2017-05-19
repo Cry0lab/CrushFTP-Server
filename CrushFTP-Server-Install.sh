@@ -2,7 +2,7 @@
 
 #installs necessary programs
 yum update -y
-yum install wget nano unzip java net-tools open-vm-tools -y
+yum install wget nano unzip java net-tools open-vm-tools sssd realmd oddjob oddjob-mkhomedir adcli samba-common samba-common-tools krb5-workstation openldap-clients policycoreutils-python -y
  
 #Disables firewall
 systemctl disable firewalld
@@ -20,7 +20,8 @@ mkdir Backup-Network-Configs
 cp /etc/sysconfig/network-scripts/ifcfg-$eth_interface ~/Backup-Network-Configs/ifcfg-$eth_interface.txt
 
 
-#Functions
+###########<<<<<<<<FUNCTIONS>>>>>>>###########
+
 isAlive() #Takes an IP Address and sees if it is alive or not
 {
 A=$(ping -c 4 $1 | grep Unreach | wc -l )
@@ -29,7 +30,40 @@ if [ "$A" != "0" ]; then
 else
  echo "1" #Ip is alive
 fi
+}
 
+realmJoin() #Joins a realm with redundancy. 
+{
+echo
+echo "What is the name of the Domain you wish to join? (something.local usually):"
+read Domain
+echo
+echo "What is the username for a Domain Admin for $Domain?:"
+read Admin
+realm join --user=$Admin $Domain
+if [ $(realm list | less | grep $2 | wc -l) == "0" ]; then
+ echo
+ echo "Domain join failed."
+ echo
+ echo "Would you like to attempt to join a Domain again? ([y]/n):"
+ 
+ case "$choice" in
+ y|Y|$response ) RealmAgain="y";;
+ n|N|* ) RealmAgain="n";;
+ esac
+ 
+ if [ "$AUTO_IP" =  "y" ]; then
+  realmJoin
+ else
+  echo
+  echo "Domain Join Canceled"
+ fi
+ 
+else
+echo
+echo "$Domain successfully joined!"
+echo
+fi
 }
 
 #Gather user Preferences for the Network
@@ -231,6 +265,10 @@ nameserver $DNS1
 nameserver $DNS2
 EOF
 service network restart
+
+echo
+realmJoin
+echo
 
 echo
 echo "Network Configuration Complete. Now Installing CrushFTP"
