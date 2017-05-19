@@ -21,7 +21,7 @@ cp /etc/sysconfig/network-scripts/ifcfg-$eth_interface ~/Backup-Network-Configs/
 
 
 #Functions
-isAlive ()
+isAlive()
 {
 A=$(ping -c 4 $1 | grep icmp | wc -l )
 if [ "A" != "0" ]; then
