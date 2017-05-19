@@ -45,20 +45,17 @@ if [ $(realm list | less | grep $Domain | wc -l) == "0" ]; then
  echo
  echo "Domain join failed."
  echo
- echo "Would you like to attempt to join a Domain again? ([y]/n):"
- 
+ read "Would you like to attempt to join a Domain again? ([y]/n):" choice
  case "$choice" in
  y|Y|$response ) RealmAgain="y";;
  n|N|* ) RealmAgain="n";;
  esac
- 
  if [ "$AUTO_IP" =  "y" ]; then
   realmJoin
  else
   echo
   echo "Domain Join Canceled"
  fi
- 
 else
 echo
 echo "$Domain successfully joined!"
