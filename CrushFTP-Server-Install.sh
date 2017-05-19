@@ -50,7 +50,7 @@ if [ $(realm list | less | grep domain | wc -l) == "0" ]; then
  y|Y|$response ) RealmAgain="y";;
  n|N|* ) RealmAgain="n";;
  esac
- if [ "$AUTO_IP" =  "y" ]; then
+ if [ "$RealmAgain" =  "y" ]; then
   realmJoin
  else
   echo
