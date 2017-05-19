@@ -77,7 +77,9 @@ fi
 
 if [ "$(isAlive $I)" == "1" ]; then
  echo "That IP ADDRESS is already in use. Please enter a different one:"
+ read IP
  validIP
+ return 0
 fi
 
 
