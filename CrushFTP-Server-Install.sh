@@ -264,11 +264,23 @@ EOF
 service network restart
 
 echo
-realmJoin
 echo
+read -p "Would you like to join a Domain? ([y]/n):" choice
+case "$choice" in
+y|Y|$response ) joinRealm="y";;
+n|N|* ) joinRealm="n";;
+esac
+if [ "$joinRealm" = "y" ]; then
+ realmJoin
+else
+ echo
+ echo "Domain Join Canceled"
+fi
 
 echo
-echo "Network Configuration Complete. Now Installing CrushFTP"
+echo
+echo "Now Installing CrushFTP"
+echo
 echo
 #Installation of CrushFTP
 cd /var/opt/
