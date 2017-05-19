@@ -45,7 +45,7 @@ if [ $(realm list | less | grep $Domain | wc -l) == "0" ]; then
  echo
  echo "Domain join failed."
  echo
- read "Would you like to attempt to join a Domain again? ([y]/n):" choice
+ read -p "Would you like to attempt to join a Domain again? ([y]/n):" choice
  case "$choice" in
  y|Y|$response ) RealmAgain="y";;
  n|N|* ) RealmAgain="n";;
