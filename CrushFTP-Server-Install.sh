@@ -21,13 +21,13 @@ cp /etc/sysconfig/network-scripts/ifcfg-$eth_interface ~/Backup-Network-Configs/
 
 
 #Functions
-isAlive()
+isAlive() #Takes an IP Address and sees if it is alive or not
 {
 A=$(ping -c 4 $1 | grep Unreach | wc -l )
-if [ "A" != "0" ]; then
- echo "1"
+if [ "$A" != "0" ]; then
+ echo "0" #ip is available
 else
- echo "0"
+ echo "1" #Ip is alive
 fi
 
 }
@@ -67,10 +67,6 @@ read IP
 validIP()
 {
 I=$IP
-if [ "$(isAlive $I)" == "0" ]; then
- echo "That IP ADDRESS is already in use. Please enter a different one:"
- validIP
-fi
 
 if [ "$(ipcalc -cs $I && echo 1 || echo 0)" == 0 ]; then
 echo "Please enter a valid IP Address:"
@@ -78,6 +74,13 @@ read IP
 validIP
 return 0
 fi
+
+if [ "$(isAlive $I)" == "1" ]; then
+ echo "That IP ADDRESS is already in use. Please enter a different one:"
+ validIP
+fi
+
+
 }
 
 validIP
