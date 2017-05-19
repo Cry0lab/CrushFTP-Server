@@ -41,7 +41,7 @@ echo
 echo "What is the username for a Domain Admin for $Domain?:"
 read Admin
 realm join --user=$Admin $Domain
-if [ $(realm list | less | grep $Domain | wc -l) == "0" ]; then
+if [ $(realm list | less | grep domain | wc -l) == "0" ]; then
  echo
  echo "Domain join failed."
  echo
