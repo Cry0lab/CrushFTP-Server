@@ -25,10 +25,10 @@ isAlive ()
 {
 A=$(ping -c 4 $1 | grep icmp | wc -l )
 if [ "A" != "0" ]; then
- echo "0" 
+ return 0
  echo "Available"
 else
- echo "1" 
+ return 1
  echo "Not Available"
 fi
 
