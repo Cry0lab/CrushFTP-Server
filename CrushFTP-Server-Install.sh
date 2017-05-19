@@ -23,13 +23,11 @@ cp /etc/sysconfig/network-scripts/ifcfg-$eth_interface ~/Backup-Network-Configs/
 #Functions
 isAlive()
 {
-A=$(ping -c 4 $1 | grep icmp | wc -l )
+A=$(ping -c 4 $1 | grep Unreach | wc -l )
 if [ "A" != "0" ]; then
- return 0
- echo "Available"
+ echo "1"
 else
- return 1
- echo "Not Available"
+ echo "0"
 fi
 
 }
@@ -69,7 +67,7 @@ read IP
 validIP()
 {
 I=$IP
-if [ "$(isAlive $I)" == 1 ]; then
+if [ "$(isAlive $I)" == "0" ]; then
  echo "That IP ADDRESS is already in use. Please enter a different one:"
  validIP
 fi
