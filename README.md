@@ -12,7 +12,7 @@ cd ~
 
 yum install git -y
 
-git clone git://github.com/YankeeForty2/CrushFTP-Server.git
+git clone git://github.com/Cry0lab/CrushFTP-Server.git
 
 cd CrushFTP-Server/
 
